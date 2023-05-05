@@ -32,6 +32,11 @@ class Graph
     unordered_map<int, unordered_map<int, int>> m;
 
 public:
+    Graph(int v)
+    {
+        for (int i = 1; i <= v; i++)
+            m[i] = {};
+    }
     void AddEdge(int v1, int v2, int cost)
     {
         m[v1][v2] = cost;
@@ -299,8 +304,8 @@ public:
 };
 int main()
 {
-    Graph *g = new Graph();
-    g->AddEdge(1, 2, 1);
+    Graph *g = new Graph(6);
+    g->AddEdge(1, 3, 1);
     g->AddEdge(2, 3, 1);
     g->AddEdge(3, 4, 1);
     g->AddEdge(4, 5, 1);
@@ -315,8 +320,6 @@ int main()
     // g->BFT();
     // cout << "\n";
     // g->DFT();
-    vector<string> v;
-    g->countPath(1, 3, {}, {}, v);
-    cout << v.size();
+    g->DIJI();
     return 0;
 }

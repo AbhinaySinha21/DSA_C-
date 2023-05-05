@@ -1,13 +1,5 @@
 #include <bits/stdc++.h>
 using namespace std;
-class compare
-{
-public:
-    bool operator()(PrimsPair *a, PrimsPair *b)
-    {
-        return a->cost > b->cost;
-    }
-};
 class PrimsPair
 {
 public:
@@ -20,6 +12,14 @@ public:
         this->vtx = vtx;
         this->acqvtx = acqvtx;
         this->cost = cost;
+    }
+};
+class compare
+{
+public:
+    bool operator()(PrimsPair *a, PrimsPair *b)
+    {
+        return a->cost > b->cost;
     }
 };
 class Prims
@@ -39,7 +39,7 @@ public:
         m[v1][v2] = cost;
         m[v2][v1] = cost;
     }
-    int PrimsAlgo()
+    void PrimsAlgo()
     {
         priority_queue<PrimsPair *, vector<PrimsPair *>, compare> pq;
         pq.push(new PrimsPair(1, 1, 0));
@@ -51,7 +51,7 @@ public:
             if (visited.find(rv->vtx) != visited.end())
                 continue;
             visited.insert(rv->vtx);
-            cout << rv->vtx << " ";
+            cout << rv->acqvtx << " " << rv->vtx << "\n";
             for (auto nbrs : m[rv->vtx])
             {
                 if (visited.find(nbrs.first) == visited.end())
